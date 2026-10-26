@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+* {
+  scrollbar-width: none;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+select {
+  appearance: base-select;
+}
+
+select::picker-icon {
+  display: none;
+}
+
+select::picker(select) {
+  appearance: base-select;
+  background: #0d0d0d;
+  border: 1px solid #1a1a1a;
+  margin-top: 4px;
+  max-height: 256px;
+  scrollbar-width: none;
+}
+
+option {
+  border-bottom: 1px solid #1a1a1a;
+  padding: 16px;
+}
+
+option:last-child {
+  border-bottom: none;
+}
+
+option::checkmark {
+  display: none;
+}
+
+option:focus {
+  outline: none;
+}
+
+option:hover {
+  background: transparent;
+}
+
+option:active {
+  background: transparent;
+}
+
+.recharts-wrapper *:focus {
+  outline: none;
+}
