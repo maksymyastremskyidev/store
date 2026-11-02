@@ -1,12 +1,12 @@
 "use client";
 
-import { createClient } from "@supabase/supabase-js";
-
 import { useRouter } from "next/navigation";
 
 import { useState, useEffect } from "react";
 
 import { loadCart, saveCart, changeQuantity, removeItem } from "@/lib/cart";
+
+import { supabase } from "@/lib/supabase-default";
 
 import {
   Loader,
@@ -15,11 +15,6 @@ import {
   ShoppingCartMinus,
   ScrollText,
 } from "lucide-react";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-);
 
 export default function Page() {
   const router = useRouter();

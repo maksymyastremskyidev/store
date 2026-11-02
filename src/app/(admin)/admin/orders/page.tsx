@@ -1,7 +1,5 @@
 "use client";
 
-import { createClient } from "@supabase/supabase-js";
-
 import { useSearchParams, useRouter } from "next/navigation";
 
 import { useState, useEffect, Suspense } from "react";
@@ -23,11 +21,6 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-);
 
 function Content() {
   const searchParams = useSearchParams();
@@ -64,8 +57,10 @@ function Content() {
 
   const [filtersPanel, setFiltersPanel] = useState(false);
 
-  async function fetchOrders() {
-    setLoading(true);
+  async function fetchOrders(initial = false) {
+    if (initial) {
+      setLoading(true);
+    }
 
     try {
       const params = new URLSearchParams(searchParams);
@@ -92,7 +87,9 @@ function Content() {
     } catch {
       setError(true);
     } finally {
-      setLoading(false);
+      if (initial) {
+        setLoading(false);
+      }
     }
   }
 
@@ -101,23 +98,16 @@ function Content() {
   }, [searchParams]);
 
   useEffect(() => {
-    fetchOrders();
+    fetchOrders(true);
   }, [searchParams]);
 
   useEffect(() => {
-    const channel = supabase
-      .channel("orders")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "orders" },
-        () => fetchOrders(),
-      )
-      .subscribe();
+    const interval = setInterval(() => {
+      fetchOrders();
+    }, 60_000);
 
-    return () => {
-      supabase.removeChannel(channel);
-    };
-  }, []);
+    return () => clearInterval(interval);
+  }, [searchParams]);
 
   function openOrderDetailsModal(order: any) {
     setOrder(order);

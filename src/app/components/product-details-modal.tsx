@@ -79,7 +79,7 @@ export default function ProductDetailsModal(props: any) {
                   .map((image: any) => (
                     <div
                       key={image.id}
-                      className="h-16 w-16 cursor-pointer border border-[#1a1a1a] bg-[#0d0d0d]"
+                      className="box-content h-16 w-16 cursor-pointer border border-[#1a1a1a] bg-[#0d0d0d]"
                     >
                       <img
                         src={image.url}

@@ -1,14 +1,14 @@
 "use client";
 
-import { createClient } from "@supabase/supabase-js";
-
 import { useParams } from "next/navigation";
 
 import { useState, useEffect } from "react";
 
-import { createPortal } from "react-dom";
+import { supabase } from "@/lib/supabase-default";
 
 import { addItem } from "@/lib/cart";
+
+import { createPortal } from "react-dom";
 
 import {
   Loader,
@@ -18,11 +18,6 @@ import {
   Plus,
   ShoppingCartPlus,
 } from "lucide-react";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-);
 
 export default function Page() {
   const { slug } = useParams();
@@ -212,7 +207,7 @@ export default function Page() {
               .map((image: any) => (
                 <div
                   key={image.id}
-                  className="h-16 w-16 cursor-pointer border border-[#1a1a1a] bg-[#0d0d0d]"
+                  className="box-content h-16 w-16 cursor-pointer border border-[#1a1a1a] bg-[#0d0d0d]"
                 >
                   <img
                     src={image.url}

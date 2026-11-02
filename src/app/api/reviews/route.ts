@@ -1,13 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
-
 import { NextRequest, NextResponse } from "next/server";
 
 import { jwtVerify } from "jose";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-);
+import { supabase } from "@/lib/supabase-secret";
 
 export async function POST(request: NextRequest) {
   const token = request.cookies.get("token")?.value;

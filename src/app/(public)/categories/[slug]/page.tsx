@@ -284,13 +284,13 @@ export default function Page() {
               href={`/products/${product.slug}`}
               className="flex flex-col divide-y divide-[#1a1a1a] border border-[#1a1a1a] bg-[#0d0d0d] focus:outline-none"
             >
-              <div className="relative aspect-square">
+              <div className="aspect-square">
                 <img
                   src={
                     product.images.find((image: any) => image.position === 1)
                       .url
                   }
-                  className="absolute h-full w-full object-contain"
+                  className="block h-full w-full object-contain"
                 />
               </div>
 

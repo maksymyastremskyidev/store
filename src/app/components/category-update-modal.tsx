@@ -7,7 +7,7 @@ export default function CategoryUpdateModal(props: any) {
     categoryUpdateModal,
     id,
     categories,
-    categoryOptions,
+    renderOptions,
     parent,
     setParent,
     name,
@@ -55,7 +55,7 @@ export default function CategoryUpdateModal(props: any) {
 
                 <option value="">None</option>
 
-                {categoryOptions(categories)}
+                {renderOptions(categories, id)}
               </select>
 
               <ChevronDown className="pointer-events-none absolute top-1/2 right-0 h-4 w-4 -translate-y-1/2 peer-open:hidden" />

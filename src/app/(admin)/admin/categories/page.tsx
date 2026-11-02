@@ -278,7 +278,14 @@ function Content() {
     router.push(`/admin/categories?${params}`);
   }
 
-  function categoriesTable(list: any[], accumulator: any[] = [], level = 0) {
+  function countCategories(categories: any[]) {
+    return categories.reduce(
+      (total, category) => total + 1 + countCategories(category.children || []),
+      0,
+    );
+  }
+
+  function renderTable(list: any[], accumulator: any[] = [], level = 0) {
     for (const category of list) {
       accumulator.push(
         <tr key={category.id}>
@@ -336,14 +343,14 @@ function Content() {
       );
 
       if (category.children && category.children.length > 0) {
-        categoriesTable(category.children, accumulator, level + 1);
+        renderTable(category.children, accumulator, level + 1);
       }
     }
 
     return accumulator;
   }
 
-  function categoryOptions(
+  function renderOptions(
     list: any[],
     excluded: string | null = null,
     accumulator: any[] = [],
@@ -363,7 +370,7 @@ function Content() {
       );
 
       if (category.children && category.children.length > 0) {
-        categoryOptions(category.children, excluded, accumulator, level + 1);
+        renderOptions(category.children, excluded, accumulator, level + 1);
       }
     }
 
@@ -391,8 +398,8 @@ function Content() {
   return (
     <div className="flex flex-1 flex-col gap-4 p-4">
       <div>
-        {categories.length}{" "}
-        {categories.length === 1 ? "Category" : "Categories"}
+        {countCategories(categories)}{" "}
+        {countCategories(categories) === 1 ? "Category" : "Categories"}
       </div>
 
       <div className="flex gap-4">
@@ -484,7 +491,7 @@ function Content() {
             </thead>
 
             <tbody className="divide-y divide-[#1a1a1a]">
-              {categoriesTable(categories)}
+              {renderTable(categories)}
             </tbody>
           </table>
         </div>
@@ -562,7 +569,7 @@ function Content() {
       <CategoryCreationModal
         categoryCreationModal={categoryCreationModal}
         categories={categories}
-        categoryOptions={categoryOptions}
+        renderOptions={renderOptions}
         parent={parent}
         setParent={setParent}
         name={name}
@@ -577,7 +584,7 @@ function Content() {
         categoryUpdateModal={categoryUpdateModal}
         id={id}
         categories={categories}
-        categoryOptions={categoryOptions}
+        renderOptions={renderOptions}
         parent={parent}
         setParent={setParent}
         name={name}

@@ -1,15 +1,10 @@
-import { createClient } from "@supabase/supabase-js";
-
 import { NextRequest, NextResponse } from "next/server";
+
+import { supabase } from "@/lib/supabase-secret";
 
 import { cookies } from "next/headers";
 
 import { jwtVerify } from "jose";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-);
 
 export async function POST(request: NextRequest) {
   const body = await request.json().catch(() => null);

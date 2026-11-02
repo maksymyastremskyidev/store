@@ -190,7 +190,7 @@ export default function OrderDetailsModal(props: any) {
 
               <div className="flex flex-col gap-4 border-t border-[#1a1a1a] p-4">
                 <div className="flex justify-between gap-4">
-                  <div className="font-bold">Promo</div>
+                  <div className="font-bold">Code</div>
 
                   <div>{order.code || "-"}</div>
                 </div>

@@ -1,19 +1,14 @@
 "use client";
 
-import { createClient } from "@supabase/supabase-js";
-
 import { useRouter } from "next/navigation";
 
 import { useState, useEffect } from "react";
 
 import { loadCart, saveCart } from "@/lib/cart";
 
-import { Loader, ChevronDown, ChevronUp, Check } from "lucide-react";
+import { supabase } from "@/lib/supabase-default";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-);
+import { Loader, ChevronDown, ChevronUp, Check } from "lucide-react";
 
 export default function Page() {
   const router = useRouter();

@@ -1,11 +1,6 @@
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase-default";
 
 import { NextResponse } from "next/server";
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
-);
 
 export async function GET() {
   const { data: categories, error: categoriesSelectionError } = await supabase

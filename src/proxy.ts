@@ -1,13 +1,8 @@
-import { createClient } from "@supabase/supabase-js";
-
 import { NextRequest, NextResponse } from "next/server";
 
 import { jwtVerify } from "jose";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SECRET_KEY!,
-);
+import { supabase } from "@/lib/supabase-secret";
 
 export async function proxy(request: NextRequest) {
   const api = request.nextUrl.pathname.startsWith("/api");
