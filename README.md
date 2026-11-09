@@ -29,6 +29,14 @@ A full-stack e-commerce application built with Next.js, TypeScript, Supabase, an
 - Supabase
 - Tailwind CSS
 
+# Architecture
+
+![Architecture](images/architecture.png)
+
+# Preview
+
+![Preview](images/preview.png)
+
 # Getting Started
 
 ## 1. Clone the repository
@@ -309,3 +317,14 @@ ADD TABLE public.product_options;
 ```bash
 npm run dev
 ```
+
+## 7. Open the application
+
+Open [http://localhost:3000](http://localhost:3000) in your browser
+
+## 8. Access the admin panel
+
+1. Visit [http://localhost:3000/sign-up](http://localhost:3000/sign-up) to create an account
+2. Open your Supabase project
+3. Change the `admin` field from `false` to `true` for your account in the `users` table
+4. Visit [http://localhost:3000/admin/dashboard](http://localhost:3000/admin/dashboard) to access the admin panel
